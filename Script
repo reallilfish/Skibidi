@@ -1,0 +1,50 @@
+-- Place this LocalScript inside the StarterPlayer -> StarterPlayerScripts
+
+local player = game.Players.LocalPlayer
+local playerCharacter = player.Character or player.CharacterAdded:Wait()
+local playerHumanoid = playerCharacter:WaitForChild("Humanoid")
+local spawnInterval = 0.1  -- Time interval in seconds between part spawns
+local partHeight = 4    -- Height to spawn the part below the player (relative to their feet)
+local partSize = Vector3.new(5, 1, 5)  -- Size of the part that spawns
+
+local spawning = false  -- Variable to track whether parts are spawning
+
+-- Function to spawn a part under the player
+local function spawnPartUnderPlayer()
+    while spawning do
+        -- Wait for the interval before spawning the next part
+        wait(spawnInterval)
+
+        -- Get the position of the player's humanoid root part (feet)
+        local playerPosition = playerCharacter.HumanoidRootPart.Position
+
+        -- Create the new part under the player
+        local newPart = Instance.new("Part")
+        newPart.Size = partSize  -- Set the size of the part
+        newPart.Position = Vector3.new(playerPosition.X, playerPosition.Y - partHeight, playerPosition.Z)  -- Position it below the player
+        newPart.Anchored = true  -- Anchor the part so it doesn't fall
+        newPart.CanCollide = true  -- Make the part collide with the player
+        newPart.Material = Enum.Material.SmoothPlastic
+        newPart.Color = Color3.fromRGB(120, 5, 120)  -- Set the color to purple (customizable)
+
+        -- Parent the part to the Workspace
+        newPart.Parent = game.Workspace
+
+        -- Delete the part after 1 second
+        game.Debris:AddItem(newPart, 1)  -- This will remove the part after 1 second
+    end
+end
+
+-- Toggle spawning on and off when pressing the "F" key
+game:GetService("UserInputService").InputBegan:Connect(function(input, gameProcessed)
+    if gameProcessed then return end  -- Ignore input if the game has already processed it (e.g., for chat)
+    
+    if input.KeyCode == Enum.KeyCode.F then
+        if spawning then
+            spawning = false  -- Stop spawning parts
+        else
+            spawning = true  -- Start spawning parts
+            spawnPartUnderPlayer()  -- Begin spawning parts
+        end
+    end
+end)
