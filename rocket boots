@@ -1,8 +1,8 @@
 local player = game.Players.LocalPlayer
 local playerCharacter = player.Character or player.CharacterAdded:Wait()
 local playerHumanoid = playerCharacter:WaitForChild("Humanoid")
-local spawnInterval = 0.0001  -- Reduced time interval in seconds between part spawns (faster spawning)
-local partHeight = 4        -- Height to spawn the part below the player (relative to their feet)
+local spawnInterval = 0.000000000001  -- Reduced time interval in seconds between part spawns (faster spawning)
+local partHeight = 3.8        -- Height to spawn the part below the player (relative to their feet)
 local partSize = Vector3.new(1, 1, 1)  -- Size of the part that spawns
 
 local spawning = false  -- Variable to track whether parts are spawning
@@ -29,7 +29,7 @@ local function spawnPartUnderPlayer()
 		newPart.Parent = game.Workspace
 
 		-- Delete the part after 1 second
-		game.Debris:AddItem(newPart, 5)  -- This will remove the part after 1 second
+		game.Debris:AddItem(newPart, 10)  -- This will remove the part after 1 second
 	end
 end
 
