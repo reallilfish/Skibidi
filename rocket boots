@@ -29,7 +29,7 @@ local function spawnPartUnderPlayer()
 		newPart.Parent = game.Workspace
 
 		-- Delete the part after 1 second
-		game.Debris:AddItem(newPart, 0.5)  -- This will remove the part after 1 second
+		game.Debris:AddItem(newPart, 5)  -- This will remove the part after 1 second
 	end
 end
 
