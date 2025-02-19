@@ -3,7 +3,7 @@ local playerCharacter = player.Character or player.CharacterAdded:Wait()
 local playerHumanoid = playerCharacter:WaitForChild("Humanoid")
 local spawnInterval = 0.000000000001  -- Reduced time interval in seconds between part spawns (faster spawning)
 local partHeight = 3.5        -- Default height to spawn the part below the player (relative to their feet)
-local partSize = Vector3.new(3, 1, 3)  -- Size of the part that spawns
+local partSize = Vector3.new(1, 1, 1)  -- Size of the part that spawns
 
 local spawning = false  -- Variable to track whether parts are spawning
 
@@ -20,7 +20,7 @@ local function spawnPartUnderPlayer()
 		local newPart = Instance.new("Part")
 		newPart.Size = partSize  -- Set the size of the part
 		newPart.Position = Vector3.new(playerPosition.X, playerPosition.Y - partHeight, playerPosition.Z)  -- Position it below the player
-		newPart.Anchored = false  -- Anchor the part so it doesn't fall
+		newPart.Anchored = true  -- Anchor the part so it doesn't fall
 		newPart.CanCollide = true  -- Make the part collide with the player
 		newPart.Material = Enum.Material.SmoothPlastic
 		newPart.Color = Color3.fromRGB(170, 50, 0)  -- Set the color to purple (customizable)
@@ -29,7 +29,7 @@ local function spawnPartUnderPlayer()
 		newPart.Parent = game.Workspace
 
 		-- Delete the part after 25 seconds
-		game.Debris:AddItem(newPart, 0.1)  -- This will remove the part after 25 seconds
+		game.Debris:AddItem(newPart, 5)  -- This will remove the part after 25 seconds
 	end
 end
 
