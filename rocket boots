@@ -2,7 +2,7 @@ local player = game.Players.LocalPlayer
 local playerCharacter = player.Character or player.CharacterAdded:Wait()
 local playerHumanoid = playerCharacter:WaitForChild("Humanoid")
 local spawnInterval = 0.000000000001  -- Reduced time interval in seconds between part spawns (faster spawning)
-local partHeight = 3.5        -- Height to spawn the part below the player (relative to their feet)
+local partHeight = 3.5        -- Default height to spawn the part below the player (relative to their feet)
 local partSize = Vector3.new(3, 1, 3)  -- Size of the part that spawns
 
 local spawning = false  -- Variable to track whether parts are spawning
@@ -28,8 +28,8 @@ local function spawnPartUnderPlayer()
 		-- Parent the part to the Workspace
 		newPart.Parent = game.Workspace
 
-		-- Delete the part after 1 second
-		game.Debris:AddItem(newPart, 25)  -- This will remove the part after 1 second
+		-- Delete the part after 25 seconds
+		game.Debris:AddItem(newPart, 0.001)  -- This will remove the part after 25 seconds
 	end
 end
 
@@ -37,12 +37,22 @@ end
 game:GetService("UserInputService").InputBegan:Connect(function(input, gameProcessed)
 	if gameProcessed then return end  -- Ignore input if the game has already processed it (e.g., for chat)
 
+	-- Toggle spawning on "F" key press
 	if input.KeyCode == Enum.KeyCode.F then
 		if spawning then
 			spawning = false  -- Stop spawning parts
 		else
 			spawning = true  -- Start spawning parts
 			spawnPartUnderPlayer()  -- Begin spawning parts
+		end
+	end
+	
+	-- Toggle part height between 3.5 and 5 when pressing "G"
+	if input.KeyCode == Enum.KeyCode.G then
+		if partHeight == 3.5 then
+			partHeight = 5  -- Change part height to 5
+		else
+			partHeight = 3.5  -- Change part height back to 3.5
 		end
 	end
 end)
