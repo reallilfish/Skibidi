@@ -1,8 +1,8 @@
 local player = game.Players.LocalPlayer
 local playerCharacter = player.Character or player.CharacterAdded:Wait()
 local playerHumanoid = playerCharacter:WaitForChild("Humanoid")
-local spawnInterval = 0.01  -- Reduced time interval in seconds between part spawns (faster spawning)
-local partHeight = 3.6        -- Height to spawn the part below the player (relative to their feet)
+local spawnInterval = 0.0001  -- Reduced time interval in seconds between part spawns (faster spawning)
+local partHeight = 4        -- Height to spawn the part below the player (relative to their feet)
 local partSize = Vector3.new(1, 1, 1)  -- Size of the part that spawns
 
 local spawning = false  -- Variable to track whether parts are spawning
