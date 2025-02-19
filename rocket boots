@@ -20,7 +20,7 @@ local function spawnPartUnderPlayer()
 		local newPart = Instance.new("Part")
 		newPart.Size = partSize  -- Set the size of the part
 		newPart.Position = Vector3.new(playerPosition.X, playerPosition.Y - partHeight, playerPosition.Z)  -- Position it below the player
-		newPart.Anchored = false  -- Anchor the part so it doesn't fall
+		newPart.Anchored = true  -- Anchor the part so it doesn't fall
 		newPart.CanCollide = true  -- Make the part collide with the player
 		newPart.Material = Enum.Material.SmoothPlastic
 		newPart.Color = Color3.fromRGB(170, 50, 0)  -- Set the color to purple (customizable)
